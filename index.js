@@ -8,12 +8,18 @@ const users = require('./routes/users')
 const auth  = require('./routes/auth')
 const express = require('express');
 const app = express();
+const config = require('config');
+const { toUpper } = require('lodash');
 
-console.log(app.get('env'))
 
-mongoose.connect('mongodb://localhost/vidly')
+
+mongoose.connect('mongodb://localhost/vidly', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
   .then(() => console.log('Connected to MongoDB...'))
   .catch(err => console.error('Could not connect to MongoDB...'));
+
 app.use(morgan('tiny'))
 app.use(express.json());
 app.use('/api/genres', genres);

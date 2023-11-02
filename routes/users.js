@@ -3,10 +3,13 @@ const express = require('express')
 const router = express.Router()
 const _ = require('lodash')
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
+const auth = require('../middleware/auth')
 
 
-router.get('/',async (req,res) => {
-    res.json(await User.find())
+router.get('/me',auth,async (req,res) => {
+    const user = await User.findById(req.user._id).select('-password')
+    res.json(user)
 })
 
 router.post('/',async (req,res) => {
@@ -19,7 +22,8 @@ router.post('/',async (req,res) => {
     req.body.password = await bcrypt.hash(req.body.password,salt)
     const user = await new User(_.pick(req.body,['name','email','password'])).save()
 
-    res.status(200).json(_.pick(user,['_id','name','email']))
+    const token = user.userAuthentication()
+    res.header('X-auth-token',token).status(200).json(_.pick(user,['_id','name','email']))
     
 })
 

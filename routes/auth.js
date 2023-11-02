@@ -4,6 +4,7 @@ const {User} = require('../models/users')
 const router = express.Router()
 const bcrypt = require('bcrypt')
 const Joi = require('joi')
+const config = require('config')
 
 
 router.post('/',async (req,res) => {
@@ -14,9 +15,9 @@ router.post('/',async (req,res) => {
     if(!user) return res.status(400).send('Invalid email or password')
     
     const validPassword = await bcrypt.compare(req.body.password,user.password)
-    if(!validPassword) return res.status(400).send('Invalid email or passwor')
+    if(!validPassword) return res.status(400).send('Invalid email or password')
     
-    const token =jwt.sign({_id:user._id},'emranyonasyimer')
+    const token = user.userAuthentication()
     res.status(200).json(token)
     
 })
