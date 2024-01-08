@@ -1,6 +1,6 @@
-# Movie Rental System
+# Movie Rental System - Backend
 
-This Movie Rental System is a comprehensive solution for managing and organizing movie rentals efficiently. Built using a modern tech stack, it streamlines the rental process and enhances the user experience.
+This Movie Rental System is a comprehensive backend solution for managing and organizing movie rentals efficiently. Built using a modern tech stack, it streamlines the rental process and enhances the user experience.
 
 ## Features
 
@@ -13,11 +13,6 @@ This Movie Rental System is a comprehensive solution for managing and organizing
 
 ## Tech Stack
 
-
 - **Backend:** Node.js, Express.js
 - **Database:** MongoDB
 - **Authentication:** JWT for secure user authentication
-
-
-
-Feel free to explore the codebase, report issues, and contribute to the development of this Movie Rental System. Your feedback and contributions are highly appreciated.
